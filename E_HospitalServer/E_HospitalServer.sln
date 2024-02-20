@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E_HospitalServer.Entities", "E_HospitalServer.Entities\E_HospitalServer.Entities.csproj", "{4226A1B8-6C3C-4254-8627-AEE17E173DFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E_HospitalServer.DataAccess", "E_HospitalServer.DataAccess\E_HospitalServer.DataAccess.csproj", "{51BC7497-33E8-4E61-9218-10D93D3712C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E_HospitalServer.WebApi", "E_HospitalServer.WebApi\E_HospitalServer.WebApi.csproj", "{777E74D5-0567-4F33-BBE9-ADFEF6A113A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4226A1B8-6C3C-4254-8627-AEE17E173DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4226A1B8-6C3C-4254-8627-AEE17E173DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4226A1B8-6C3C-4254-8627-AEE17E173DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4226A1B8-6C3C-4254-8627-AEE17E173DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51BC7497-33E8-4E61-9218-10D93D3712C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51BC7497-33E8-4E61-9218-10D93D3712C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51BC7497-33E8-4E61-9218-10D93D3712C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51BC7497-33E8-4E61-9218-10D93D3712C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777E74D5-0567-4F33-BBE9-ADFEF6A113A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777E74D5-0567-4F33-BBE9-ADFEF6A113A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777E74D5-0567-4F33-BBE9-ADFEF6A113A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777E74D5-0567-4F33-BBE9-ADFEF6A113A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
