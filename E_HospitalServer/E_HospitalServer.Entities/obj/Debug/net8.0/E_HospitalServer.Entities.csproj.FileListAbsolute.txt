@@ -1,0 +1,13 @@
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/bin/Debug/net8.0/E_HospitalServer.Entities.deps.json
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/bin/Debug/net8.0/E_HospitalServer.Entities.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/bin/Debug/net8.0/E_HospitalServer.Entities.pdb
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.csproj.AssemblyReference.cache
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.GeneratedMSBuildEditorConfig.editorconfig
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.AssemblyInfoInputs.cache
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.AssemblyInfo.cs
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.csproj.CoreCompileInputs.cache
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.sourcelink.json
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/refint/E_HospitalServer.Entities.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/E_HospitalServer.Entities.pdb
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/obj/Debug/net8.0/ref/E_HospitalServer.Entities.dll

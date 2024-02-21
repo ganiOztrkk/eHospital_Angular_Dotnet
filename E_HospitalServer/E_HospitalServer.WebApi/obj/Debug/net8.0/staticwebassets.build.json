@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "iOutXP8Mu5GD47Zb8tEphdffPy5GTLqMrpUL9trsPt0=",
+  "Source": "E_HospitalServer.WebApi",
+  "BasePath": "_content/E_HospitalServer.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
