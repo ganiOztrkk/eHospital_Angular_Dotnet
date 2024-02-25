@@ -4,5 +4,7 @@ public enum UserType
 {
     User,
     Doctor,
-    Nurse
+    Nurse,
+    Patient,
+    Admin
 }

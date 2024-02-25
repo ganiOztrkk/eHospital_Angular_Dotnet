@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace E_HospitalServer.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240221103002_User_IdRemove")]
-    partial class User_IdRemove
+    [Migration("20240225131148_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,9 +32,8 @@ namespace E_HospitalServer.DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
-                    b.Property<string>("Specialty")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("Specialty")
+                        .HasColumnType("integer")
                         .HasColumnName("specialty");
 
                     b.Property<List<string>>("WorkingDays")

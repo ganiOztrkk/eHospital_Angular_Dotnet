@@ -110,3 +110,4 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/E_HospitalServer.WebApi.pdb
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/E_HospitalServer.WebApi.genruntimeconfig.cache
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/ref/E_HospitalServer.WebApi.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.UI.dll

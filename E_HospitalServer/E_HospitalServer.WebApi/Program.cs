@@ -1,4 +1,5 @@
 using E_HospitalServer.DataAccess;
+using E_HospitalServer.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+CreateAdminUserMiddleware.CreateFirstUser(app);
 
 app.UseHttpsRedirection();
 

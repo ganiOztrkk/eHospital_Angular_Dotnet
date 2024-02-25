@@ -66,7 +66,7 @@ namespace E_HospitalServer.DataAccess.Migrations
                 columns: table => new
                 {
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    specialty = table.Column<string>(type: "text", nullable: false),
+                    specialty = table.Column<int>(type: "integer", nullable: false),
                     working_days = table.Column<List<string>>(type: "text[]", nullable: false)
                 },
                 constraints: table =>

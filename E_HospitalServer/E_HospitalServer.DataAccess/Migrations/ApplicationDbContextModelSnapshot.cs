@@ -29,9 +29,8 @@ namespace E_HospitalServer.DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
-                    b.Property<string>("Specialty")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("Specialty")
+                        .HasColumnType("integer")
                         .HasColumnName("specialty");
 
                     b.Property<List<string>>("WorkingDays")
