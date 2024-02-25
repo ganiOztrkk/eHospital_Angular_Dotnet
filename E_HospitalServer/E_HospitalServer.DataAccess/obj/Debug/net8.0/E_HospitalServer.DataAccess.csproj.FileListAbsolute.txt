@@ -16,3 +16,7 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/obj/Debug/net8.0/E_HospitalServer.DataAccess.pdb
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/obj/Debug/net8.0/E_HospitalServer.DataAccess.genruntimeconfig.cache
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/obj/Debug/net8.0/ref/E_HospitalServer.DataAccess.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/bin/Debug/net8.0/E_HospitalServer.Business.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/bin/Debug/net8.0/E_HostpitalServer.Core.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/bin/Debug/net8.0/E_HospitalServer.Business.pdb
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/bin/Debug/net8.0/E_HostpitalServer.Core.pdb

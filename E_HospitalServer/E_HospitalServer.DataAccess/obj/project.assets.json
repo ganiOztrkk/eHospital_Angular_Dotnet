@@ -560,7 +560,7 @@
           "System.Text.Json": "8.0.0"
         },
         "compile": {
-          "lib/net8.0/_._": {
+          "lib/net8.0/Microsoft.Extensions.DependencyModel.dll": {
             "related": ".xml"
           }
         },
@@ -770,6 +770,23 @@
         "runtime": {
           "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "Scrutor/4.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.DependencyModel": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Scrutor.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Scrutor.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -986,7 +1003,7 @@
       "System.Text.Encodings.Web/8.0.0": {
         "type": "package",
         "compile": {
-          "lib/net8.0/_._": {
+          "lib/net8.0/System.Text.Encodings.Web.dll": {
             "related": ".xml"
           }
         },
@@ -1011,7 +1028,7 @@
           "System.Text.Encodings.Web": "8.0.0"
         },
         "compile": {
-          "lib/net8.0/_._": {
+          "lib/net8.0/System.Text.Json.dll": {
             "related": ".xml"
           }
         },
@@ -1040,6 +1057,20 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "E_HospitalServer.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "E_HospitalServer.Entities": "1.0.0",
+          "E_HostpitalServer.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/E_HospitalServer.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/E_HospitalServer.Business.dll": {}
+        }
+      },
       "E_HospitalServer.Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -1051,6 +1082,16 @@
         },
         "runtime": {
           "bin/placeholder/E_HospitalServer.Entities.dll": {}
+        }
+      },
+      "E_HostpitalServer.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/E_HostpitalServer.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/E_HostpitalServer.Core.dll": {}
         }
       }
     }
@@ -2312,6 +2353,29 @@
         "postgresql.png"
       ]
     },
+    "Scrutor/4.2.2": {
+      "sha512": "t5VIYA7WJXoJJo7s4DoHakMGwTu+MeEnZumMOhTCH7kz9xWha24G7dJNxWrHPlu0ZdZAS4jDZCxxAnyaBh7uYw==",
+      "type": "package",
+      "path": "scrutor/4.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/Scrutor.dll",
+        "lib/net461/Scrutor.pdb",
+        "lib/net461/Scrutor.xml",
+        "lib/net6.0/Scrutor.dll",
+        "lib/net6.0/Scrutor.pdb",
+        "lib/net6.0/Scrutor.xml",
+        "lib/netcoreapp3.1/Scrutor.dll",
+        "lib/netcoreapp3.1/Scrutor.pdb",
+        "lib/netcoreapp3.1/Scrutor.xml",
+        "lib/netstandard2.0/Scrutor.dll",
+        "lib/netstandard2.0/Scrutor.pdb",
+        "lib/netstandard2.0/Scrutor.xml",
+        "scrutor.4.2.2.nupkg.sha512",
+        "scrutor.nuspec"
+      ]
+    },
     "System.CodeDom/4.4.0": {
       "sha512": "2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "type": "package",
@@ -2735,20 +2799,32 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "E_HospitalServer.Business/1.0.0": {
+      "type": "project",
+      "path": "../E_HospitalServer.Business/E_HospitalServer.Business.csproj",
+      "msbuildProject": "../E_HospitalServer.Business/E_HospitalServer.Business.csproj"
+    },
     "E_HospitalServer.Entities/1.0.0": {
       "type": "project",
       "path": "../E_HospitalServer.Entities/E_HospitalServer.Entities.csproj",
       "msbuildProject": "../E_HospitalServer.Entities/E_HospitalServer.Entities.csproj"
+    },
+    "E_HostpitalServer.Core/1.0.0": {
+      "type": "project",
+      "path": "../E_HostpitalServer.Core/E_HostpitalServer.Core.csproj",
+      "msbuildProject": "../E_HostpitalServer.Core/E_HostpitalServer.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "EFCore.NamingConventions >= 8.0.0",
+      "E_HospitalServer.Business >= 1.0.0",
       "E_HospitalServer.Entities >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.0",
       "Microsoft.AspNetCore.Identity.UI >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.0"
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.0",
+      "Scrutor >= 4.2.2"
     ]
   },
   "packageFolders": {
@@ -2776,6 +2852,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+            "/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/E_HospitalServer.Business.csproj": {
+              "projectPath": "/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/E_HospitalServer.Business.csproj"
+            },
             "/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/E_HospitalServer.Entities.csproj": {
               "projectPath": "/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Entities/E_HospitalServer.Entities.csproj"
             }
@@ -2813,6 +2892,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[8.0.0, )"
+          },
+          "Scrutor": {
+            "target": "Package",
+            "version": "[4.2.2, )"
           }
         },
         "imports": [

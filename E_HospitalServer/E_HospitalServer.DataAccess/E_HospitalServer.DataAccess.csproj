@@ -15,9 +15,11 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+      <PackageReference Include="Scrutor" Version="4.2.2" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\E_HospitalServer.Business\E_HospitalServer.Business.csproj" />
       <ProjectReference Include="..\E_HospitalServer.Entities\E_HospitalServer.Entities.csproj" />
     </ItemGroup>
 

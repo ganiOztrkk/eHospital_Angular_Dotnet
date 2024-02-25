@@ -1,9 +1,11 @@
+using System.Reflection;
 using E_HospitalServer.DataAccess.Context;
 using E_HospitalServer.Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Scrutor;
 
 namespace E_HospitalServer.DataAccess;
 
@@ -26,9 +28,23 @@ public static class DependencyInjection
                 cfr.Password.RequireLowercase = false;
                 cfr.Password.RequireDigit = false;
                 cfr.Password.RequireNonAlphanumeric = false;
+                cfr.SignIn.RequireConfirmedEmail = true;
+                cfr.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                cfr.Lockout.MaxFailedAccessAttempts = 3;
+                cfr.Lockout.AllowedForNewUsers = true;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+        
+        services.Scan(action =>
+        {
+            action
+                .FromAssemblies(Assembly.GetExecutingAssembly())
+                .AddClasses(publicOnly: false)
+                .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                .AsMatchingInterface()
+                .WithScopedLifetime();
+        });
         
         return services;
     }

@@ -9,11 +9,13 @@
       "E_HospitalServer.DataAccess/1.0.0": {
         "dependencies": {
           "EFCore.NamingConventions": "8.0.0",
+          "E_HospitalServer.Business": "1.0.0",
           "E_HospitalServer.Entities": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0",
           "Microsoft.AspNetCore.Identity.UI": "8.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
+          "Scrutor": "4.2.2"
         },
         "runtime": {
           "E_HospitalServer.DataAccess.dll": {}
@@ -470,6 +472,18 @@
           }
         }
       },
+      "Scrutor/4.2.2": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.DependencyModel": "8.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Scrutor.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
       "System.CodeDom/4.4.0": {
         "runtime": {
           "lib/netstandard2.0/System.CodeDom.dll": {
@@ -562,12 +576,26 @@
         }
       },
       "System.Threading.Channels/6.0.0": {},
+      "E_HospitalServer.Business/1.0.0": {
+        "dependencies": {
+          "E_HospitalServer.Entities": "1.0.0",
+          "E_HostpitalServer.Core": "1.0.0"
+        },
+        "runtime": {
+          "E_HospitalServer.Business.dll": {}
+        }
+      },
       "E_HospitalServer.Entities/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0"
         },
         "runtime": {
           "E_HospitalServer.Entities.dll": {}
+        }
+      },
+      "E_HostpitalServer.Core/1.0.0": {
+        "runtime": {
+          "E_HostpitalServer.Core.dll": {}
         }
       }
     }
@@ -823,6 +851,13 @@
       "path": "npgsql.entityframeworkcore.postgresql/8.0.0",
       "hashPath": "npgsql.entityframeworkcore.postgresql.8.0.0.nupkg.sha512"
     },
+    "Scrutor/4.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t5VIYA7WJXoJJo7s4DoHakMGwTu+MeEnZumMOhTCH7kz9xWha24G7dJNxWrHPlu0ZdZAS4jDZCxxAnyaBh7uYw==",
+      "path": "scrutor/4.2.2",
+      "hashPath": "scrutor.4.2.2.nupkg.sha512"
+    },
     "System.CodeDom/4.4.0": {
       "type": "package",
       "serviceable": true,
@@ -928,7 +963,17 @@
       "path": "system.threading.channels/6.0.0",
       "hashPath": "system.threading.channels.6.0.0.nupkg.sha512"
     },
+    "E_HospitalServer.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "E_HospitalServer.Entities/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "E_HostpitalServer.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
