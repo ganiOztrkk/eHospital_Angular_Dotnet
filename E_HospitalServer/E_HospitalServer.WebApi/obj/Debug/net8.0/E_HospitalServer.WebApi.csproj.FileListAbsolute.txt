@@ -244,3 +244,11 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/E_HostpitalServer.Core.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/E_HospitalServer.Business.pdb
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/E_HostpitalServer.Core.pdb
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll

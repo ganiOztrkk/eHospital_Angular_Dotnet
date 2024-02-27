@@ -1,4 +1,3 @@
-using System.Net;
 using E_HospitalServer.Business.Services;
 using E_HospitalServer.Entities.DTOs;
 using E_HospitalServer.Entities.Models;
@@ -10,7 +9,8 @@ namespace E_HospitalServer.DataAccess.Services;
 
 public class AuthService(
     UserManager<User> userManager,
-    SignInManager<User> signInManager) : IAuthService
+    SignInManager<User> signInManager,
+    JwtProvider jwtProvider) : IAuthService
 {
     public async Task<Result<LoginResponseDto>> LoginAsync(LoginRequestDto request, CancellationToken cancellationToken)
     {
@@ -45,9 +45,10 @@ public class AuthService(
             return (500, "Your password is wrong");
         }
 
-        return new LoginResponseDto(
-            "token",
-            "refreshtoken",
-            DateTime.Now.AddDays(1));
+        
+        
+        var loginResponse = await jwtProvider.CreateToken(user);
+
+        return loginResponse;
     }
 }
