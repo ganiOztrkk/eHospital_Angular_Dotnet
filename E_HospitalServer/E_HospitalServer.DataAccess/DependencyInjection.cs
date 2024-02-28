@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Text;
 using E_HospitalServer.DataAccess.Context;
 using E_HospitalServer.DataAccess.Options;
 using E_HospitalServer.DataAccess.Services;
@@ -8,8 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Scrutor;
 
 namespace E_HospitalServer.DataAccess;
