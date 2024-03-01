@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZKeBCrdAXwXkbu5tmf3PCRKn3EqdDiz/np+0RgclM71A9R5nolThbrLNBJcTY6j3l9zg5c0/zR/N4j9afik40Q==",
+  "dgSpecHash": "eRzVFlXTTUKw0w0Vau+OCz9jxWUe3uB1dDxIr6Frs9Er/VxoD24FVoDqmzB68wuGZyOH/JqU7bws+p1vuJ5sIQ==",
   "success": true,
   "projectFilePath": "/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.DataAccess/E_HospitalServer.DataAccess.csproj",
   "expectedPackageFiles": [
+    "/Users/gani/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/Users/gani/.nuget/packages/efcore.namingconventions/8.0.0/efcore.namingconventions.8.0.0.nupkg.sha512",
     "/Users/gani/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/gani/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.0/microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",

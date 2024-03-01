@@ -252,3 +252,4 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/AutoMapper.dll

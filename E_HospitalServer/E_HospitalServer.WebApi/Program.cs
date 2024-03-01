@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using E_HospitalServer.DataAccess;
 using E_HospitalServer.WebApi.Middlewares;
 
@@ -22,6 +23,11 @@ CreateAdminUserMiddleware.CreateFirstUser(app);
 
 app.UseHttpsRedirection();
 
-app.MapControllers();
+app.MapControllers()
+    .RequireAuthorization(policy =>
+    {
+        policy.RequireClaim(ClaimTypes.NameIdentifier);
+        policy.AddAuthenticationSchemes("Bearer");
+    });
 
 app.Run();

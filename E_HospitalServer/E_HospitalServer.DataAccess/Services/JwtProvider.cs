@@ -14,7 +14,7 @@ public class JwtProvider(
     UserManager<User> userManager,
     IOptions<JwtOptions> jwtOptions)
 {
-    public async Task<LoginResponseDto> CreateToken(User user)
+    public async Task<LoginResponseDto> CreateToken(User user, bool rememberMe)
     {
         List<Claim> claims = new()
         {
@@ -22,10 +22,12 @@ public class JwtProvider(
             new Claim(ClaimTypes.Name, string.Join(" ",user.FirstName, user.LastName)),
             new Claim(ClaimTypes.Email, user.Email ?? ""),
             new Claim("Username", user.UserName ?? "" )
-            
         };
         
         var expires = DateTime.UtcNow.AddHours(4);
+
+        if (rememberMe) 
+            expires = expires.AddDays(1);
         
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey));
 

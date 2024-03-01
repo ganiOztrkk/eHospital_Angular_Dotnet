@@ -18,6 +18,17 @@
           "E_HospitalServer.WebApi.dll": {}
         }
       },
+      "AutoMapper/13.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.0"
+          }
+        }
+      },
       "EFCore.NamingConventions/8.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "8.0.0",
@@ -1842,6 +1853,7 @@
       },
       "E_HospitalServer.DataAccess/1.0.0": {
         "dependencies": {
+          "AutoMapper": "13.0.1",
           "EFCore.NamingConventions": "8.0.0",
           "E_HospitalServer.Business": "1.0.0",
           "E_HospitalServer.Entities": "1.0.0",
@@ -1875,6 +1887,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "path": "automapper/13.0.1",
+      "hashPath": "automapper.13.0.1.nupkg.sha512"
     },
     "EFCore.NamingConventions/8.0.0": {
       "type": "package",

@@ -22,6 +22,8 @@ public static class DependencyInjection
                 .UseSnakeCaseNamingConvention();
         });
 
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
         services
             .AddIdentity<User, IdentityRole<Guid>>(cfr =>
             {

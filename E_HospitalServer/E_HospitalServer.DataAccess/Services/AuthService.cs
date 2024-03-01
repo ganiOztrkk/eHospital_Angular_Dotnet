@@ -47,8 +47,22 @@ public class AuthService(
 
         
         
-        var loginResponse = await jwtProvider.CreateToken(user);
+        var loginResponse = await jwtProvider.CreateToken(user, request.RememberMe);
 
         return loginResponse;
     }
+
+    public async Task<Result<LoginResponseDto>> GetTokeByRefreshToken(string refreshToken, CancellationToken cancellationToken)
+    {
+        var user = await userManager.Users
+            .Where(x => x.RefreshToken == refreshToken)
+            .FirstOrDefaultAsync(cancellationToken);
+        if (user is null) return (500, "Refresh token is not valid.");
+
+        var loginResponse = await jwtProvider.CreateToken(user, false);
+
+        return loginResponse;
+    }
+    
+    
 }
