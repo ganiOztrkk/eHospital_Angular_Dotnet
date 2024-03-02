@@ -171,6 +171,10 @@ namespace E_HospitalServer.DataAccess.Migrations
                     b.HasKey("Id")
                         .HasName("pk_user");
 
+                    b.HasIndex("EmailConfirmCode")
+                        .IsUnique()
+                        .HasDatabaseName("ix_user_email_confirm_code");
+
                     b.ToTable("user", (string)null);
                 });
 

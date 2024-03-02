@@ -9,4 +9,6 @@ public interface IAuthService
      
      Task<Result<LoginResponseDto>> GetTokeByRefreshToken(string refreshToken, CancellationToken cancellationToken);
      
+     Task<Result<string>> SendConfirmEmailAsync(string email, CancellationToken cancellationToken);
+     Task<Result<string>> ConfirmVerificationEmail(int emailConfirmCode, CancellationToken cancellationToken);
 }

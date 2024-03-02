@@ -11,4 +11,8 @@
       <ProjectReference Include="..\E_HostpitalServer.Core\E_HostpitalServer.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="GenericEmailService" Version="8.0.0" />
+    </ItemGroup>
+
 </Project>

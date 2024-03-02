@@ -47,7 +47,15 @@ internal sealed class UserService(
     
         Random random = new();
 
-        user.EmailConfirmCode = random.Next(100000, 999999);
+        bool isEmailConfirmCodeExists = true;
+        while (isEmailConfirmCodeExists)
+        {
+            user.EmailConfirmCode = random.Next(100000, 999999);
+            if(!userManager.Users.Any(p=> p.EmailConfirmCode == user.EmailConfirmCode))
+            {
+                isEmailConfirmCodeExists = false;
+            }
+        }
         user.EmailConfirmCodeSendDate = DateTime.UtcNow;
         
         if (request.Specialty is not null)
@@ -68,7 +76,6 @@ internal sealed class UserService(
         if (result.Succeeded)
         {
             return Result<string>.Succeed("User Create is successful");
-            //Onay maili gönderme işlemi
         }
         return Result<string>.Failure(500, result.Errors.Select(x => x.Description).ToList());
     }

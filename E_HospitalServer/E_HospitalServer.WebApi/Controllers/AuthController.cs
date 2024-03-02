@@ -25,5 +25,26 @@ namespace E_HospitalServer.WebApi.Controllers
 
             return StatusCode(response.StatusCode, response);
         }
+        
+        
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> SendConfirmMail(string email, CancellationToken cancellationToken)
+        {
+            var response = await authService.SendConfirmEmailAsync(email, cancellationToken);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(int emailConfirmCode, CancellationToken cancellationToken)
+        {
+            var response = await authService.ConfirmVerificationEmail(emailConfirmCode, cancellationToken);
+            return StatusCode(response.StatusCode, response);
+        }
+        
+        
+        
+        
     }
 }
