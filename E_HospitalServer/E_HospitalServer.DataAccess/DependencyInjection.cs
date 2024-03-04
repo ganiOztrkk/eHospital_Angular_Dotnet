@@ -3,6 +3,7 @@ using E_HospitalServer.DataAccess.Context;
 using E_HospitalServer.DataAccess.Options;
 using E_HospitalServer.DataAccess.Services;
 using E_HospitalServer.Entities.Models;
+using GenericRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,8 @@ public static class DependencyInjection
                 .UseNpgsql(configuration.GetConnectionString("db"))
                 .UseSnakeCaseNamingConvention();
         });
+        
+        services.AddScoped<IUnitOfWork>(srv => srv.GetRequiredService<ApplicationDbContext>());
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

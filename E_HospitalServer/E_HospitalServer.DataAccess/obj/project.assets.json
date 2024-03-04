@@ -45,6 +45,18 @@
           "lib/net8.0/EFCore.NamingConventions.dll": {}
         }
       },
+      "EntityFrameworkCore.GenericRepository.Nuget/8.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/GenericRepository.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/GenericRepository.dll": {}
+        }
+      },
       "GenericEmailService/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -1321,6 +1333,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "EntityFrameworkCore.GenericRepository.Nuget": "8.0.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0"
         },
         "compile": {
@@ -1388,6 +1401,20 @@
         "efcore.namingconventions.8.0.0.nupkg.sha512",
         "efcore.namingconventions.nuspec",
         "lib/net8.0/EFCore.NamingConventions.dll"
+      ]
+    },
+    "EntityFrameworkCore.GenericRepository.Nuget/8.0.1": {
+      "sha512": "M1itW2bRp28IeWZ1jH4Iw9HhMMNn/j1uvHjjXsQIl0mN2nKwF+pexQRgA65r6tih/SIu659r2T3qUVmxWA9Z2Q==",
+      "type": "package",
+      "path": "entityframeworkcore.genericrepository.nuget/8.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "entityframeworkcore.genericrepository.nuget.8.0.1.nupkg.sha512",
+        "entityframeworkcore.genericrepository.nuget.nuspec",
+        "icon.jpeg",
+        "lib/net8.0/GenericRepository.dll"
       ]
     },
     "GenericEmailService/8.0.0": {

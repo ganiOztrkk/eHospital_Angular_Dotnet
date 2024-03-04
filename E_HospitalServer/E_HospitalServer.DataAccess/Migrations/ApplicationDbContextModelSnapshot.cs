@@ -23,11 +23,63 @@ namespace E_HospitalServer.DataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("E_HospitalServer.Entities.Models.Appointment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("doctor_id");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("end_date");
+
+                    b.Property<string>("EpicrisisReport")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("epicrisis_report");
+
+                    b.Property<bool>("IsItFinished")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_it_finished");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("patient_id");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money")
+                        .HasColumnName("price");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("start_date");
+
+                    b.HasKey("Id")
+                        .HasName("pk_appointment");
+
+                    b.HasIndex("DoctorId")
+                        .HasDatabaseName("ix_appointment_doctor_id");
+
+                    b.HasIndex("PatientId")
+                        .HasDatabaseName("ix_appointment_patient_id");
+
+                    b.ToTable("appointment", (string)null);
+                });
+
             modelBuilder.Entity("E_HospitalServer.Entities.Models.DoctorDetail", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
+
+                    b.Property<decimal>("AppointmentPrice")
+                        .HasColumnType("money")
+                        .HasColumnName("appointment_price");
 
                     b.Property<int>("Specialty")
                         .HasColumnType("integer")
@@ -209,6 +261,27 @@ namespace E_HospitalServer.DataAccess.Migrations
                         .HasName("pk_identity_role_guid");
 
                     b.ToTable("identity_role_guid", (string)null);
+                });
+
+            modelBuilder.Entity("E_HospitalServer.Entities.Models.Appointment", b =>
+                {
+                    b.HasOne("E_HospitalServer.Entities.Models.User", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointment_user_doctor_id");
+
+                    b.HasOne("E_HospitalServer.Entities.Models.User", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointment_user_patient_id");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("E_HospitalServer.Entities.Models.DoctorDetail", b =>

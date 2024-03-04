@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "IwnY6xiFhEcPbGCMWtx7sr1s1SLdFBbrlEaDjuhu8MCQPBajWV1FL8qqCSHnk0027C+JvW71/YYHr5Z3Dkno+Q==",
+  "dgSpecHash": "9MdcxwJAhpiRIn9wqw5ZeFqBgKnho7Nw0J/8D+6qz2AzEBanFwogC7wWucni7SVFHImklI55pGR410XoH+QctA==",
   "success": true,
   "projectFilePath": "/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/E_HospitalServer.WebApi.csproj",
   "expectedPackageFiles": [
     "/Users/gani/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/Users/gani/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/Users/gani/.nuget/packages/efcore.namingconventions/8.0.0/efcore.namingconventions.8.0.0.nupkg.sha512",
+    "/Users/gani/.nuget/packages/entityframeworkcore.genericrepository.nuget/8.0.1/entityframeworkcore.genericrepository.nuget.8.0.1.nupkg.sha512",
     "/Users/gani/.nuget/packages/genericemailservice/8.0.0/genericemailservice.8.0.0.nupkg.sha512",
     "/Users/gani/.nuget/packages/humanizer/2.14.1/humanizer.2.14.1.nupkg.sha512",
     "/Users/gani/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
