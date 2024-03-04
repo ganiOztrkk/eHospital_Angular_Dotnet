@@ -8,7 +8,7 @@ public static class EmailHelper
     {
         EmailConfigurations emailConfigurations = new(
             "smtp-mail.outlook.com",
-            "148951753gg",
+            "148951753Gg.",
             587,
             false,
             true);
