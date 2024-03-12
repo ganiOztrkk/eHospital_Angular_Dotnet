@@ -258,3 +258,7 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/MailKit.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/MimeKit.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/GenericRepository.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/FluentValidation.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/FluentValidation.AspNetCore.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/FluentValidation.DependencyInjectionExtensions.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/DefaultCorsPolicyNugetPackage.dll

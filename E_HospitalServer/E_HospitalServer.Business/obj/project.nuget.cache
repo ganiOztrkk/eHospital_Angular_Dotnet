@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "ap5TmyJfyzYC7pF54OZRAa80RokS/qlozX0wF42B/hylrTJ7uqRe5buJ8dEVwk93/4D+sT0GnQwMnk4WD7gSfQ==",
+  "dgSpecHash": "TriD6pkem8GSnKN0SntTyId+QB5hcsg2xNrLjSRPVI5HV9gwNe7/AmAhiCin6Ih4AuJaXzqqM8R8Z0Gmj/585Q==",
   "success": true,
   "projectFilePath": "/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/E_HospitalServer.Business.csproj",
   "expectedPackageFiles": [
     "/Users/gani/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/Users/gani/.nuget/packages/entityframeworkcore.genericrepository.nuget/8.0.1/entityframeworkcore.genericrepository.nuget.8.0.1.nupkg.sha512",
+    "/Users/gani/.nuget/packages/fluentvalidation/11.9.0/fluentvalidation.11.9.0.nupkg.sha512",
+    "/Users/gani/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "/Users/gani/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.9.0/fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
     "/Users/gani/.nuget/packages/genericemailservice/8.0.0/genericemailservice.8.0.0.nupkg.sha512",
     "/Users/gani/.nuget/packages/mailkit/4.3.0/mailkit.4.3.0.nupkg.sha512",
     "/Users/gani/.nuget/packages/microsoft.aspnetcore.cryptography.internal/8.0.0/microsoft.aspnetcore.cryptography.internal.8.0.0.nupkg.sha512",

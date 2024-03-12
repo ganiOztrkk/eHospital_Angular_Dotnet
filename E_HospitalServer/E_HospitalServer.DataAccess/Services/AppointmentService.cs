@@ -17,7 +17,7 @@ internal sealed class AppointmentService(
     IUnitOfWork unitOfWork,
     IMapper mapper) : IAppointmentService
 {
-    public async Task<Result<string>> CreateAppointmentAsync(CreateAppointmentDto request, CancellationToken cancellationToken)
+    public async Task<Result<string>> CreateAsync(CreateAppointmentDto request, CancellationToken cancellationToken)
     {
         User? doctor = await userManager.Users.Include(p=> p.DoctorDetail).FirstOrDefaultAsync(p=> p.Id == request.DoctorId, cancellationToken: cancellationToken);
         if(doctor is null || doctor.UserType is not UserType.Doctor)
@@ -62,7 +62,7 @@ internal sealed class AppointmentService(
         return Result<string>.Succeed("Create appointment is succedded");
     }
 
-    public async Task<Result<string>> CompleteAppointmentAsync(CompleteAppointmentDto request, CancellationToken cancellationToken)
+    public async Task<Result<string>> CompleteAsync(CompleteAppointmentDto request, CancellationToken cancellationToken)
     {
         var appointment = 
             await appointmentRepository
@@ -81,5 +81,18 @@ internal sealed class AppointmentService(
         await unitOfWork.SaveChangesAsync(cancellationToken);
         return Result<string>.Succeed("Appointment is completed");
 
+    }
+
+    public async Task<Result<List<Appointment>>> GetAllByDoctorIdAsync(Guid doctorId, CancellationToken cancellationToken)
+    {
+        List<Appointment> appointments = 
+            await appointmentRepository
+                .GetWhere(p=> p.DoctorId == doctorId)
+                .Include(p=> p.Doctor)
+                .Include(p=> p.Patient)
+                .OrderBy(p=> p.StartDate)
+                .ToListAsync(cancellationToken: cancellationToken);
+
+        return Result<List<Appointment>>.Succeed(appointments);
     }
 }

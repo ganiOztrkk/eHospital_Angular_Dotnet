@@ -145,4 +145,17 @@ internal sealed class UserService(
 
         return Result<string>.Succeed("User create is successful");
     }
+
+    public async Task<Result<List<User>>> GetAllDoctorsAsync(CancellationToken cancellationToken)
+    {
+        var doctors = 
+            await userManager
+                .Users
+                .Where(p => p.UserType == UserType.Doctor)
+                .Include(p => p.DoctorDetail)
+                .OrderBy(p => p.FirstName)
+                .ToListAsync(cancellationToken);
+
+        return Result<List<User>>.Succeed(doctors);
+    }
 }

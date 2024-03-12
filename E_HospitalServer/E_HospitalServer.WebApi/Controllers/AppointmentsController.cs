@@ -23,7 +23,7 @@ public sealed class AppointmentsController(
     [AllowAnonymous]
     public async Task<IActionResult> CreateAppointment(CreateAppointmentDto request, CancellationToken cancellationToken)
     {
-        var response = await appointmentService.CreateAppointmentAsync(request, cancellationToken);
+        var response = await appointmentService.CreateAsync(request, cancellationToken);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -32,7 +32,16 @@ public sealed class AppointmentsController(
     [AllowAnonymous]
     public async Task<IActionResult> CompleteAppointment(CompleteAppointmentDto request, CancellationToken cancellationToken)
     {
-        var response = await appointmentService.CompleteAppointmentAsync(request, cancellationToken);
+        var response = await appointmentService.CompleteAsync(request, cancellationToken);
+
+        return StatusCode(response.StatusCode, response);
+    }
+    
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAllByDoctorId(Guid doctorId, CancellationToken cancellationToken)
+    {
+        var response = await appointmentService.GetAllByDoctorIdAsync(doctorId, cancellationToken);
 
         return StatusCode(response.StatusCode, response);
     }
