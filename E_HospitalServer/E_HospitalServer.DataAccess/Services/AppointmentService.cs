@@ -41,16 +41,15 @@ internal sealed class AppointmentService(
 
         bool isDoctorHaveAppointment = true;
 
-        isDoctorHaveAppointment = appointments.Any(p => p.StartDate <= startDate && p.EndDate > startDate);       
+        isDoctorHaveAppointment = await appointments
+            .AnyAsync(p =>                        
+                    ((p.StartDate < endDate && p.StartDate >= startDate) || // Mevcut randevunun bitişi, diğer randevunun başlangıcıyla çakışıyor
+                     (p.EndDate > startDate && p.EndDate <= endDate) || // Mevcut randevunun başlangıcı, diğer randevunun bitişiyle çakışıyor
+                     (p.StartDate >= startDate && p.EndDate <= endDate) || // Mevcut randevu, diğer randevu içinde tamamen
+                     (p.StartDate <= startDate && p.EndDate >= endDate)), // Mevcut randevu, diğer randevuyu tamamen kapsıyor
+                cancellationToken);      
 
         if(isDoctorHaveAppointment)
-        {
-            return Result<string>.Failure(500,"Doctor is not available in that time");
-        }
-
-        isDoctorHaveAppointment = appointments.Any(p => p.StartDate < endDate && p.EndDate >= endDate);
-
-        if (isDoctorHaveAppointment)
         {
             return Result<string>.Failure(500,"Doctor is not available in that time");
         }
@@ -61,5 +60,26 @@ internal sealed class AppointmentService(
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result<string>.Succeed("Create appointment is succedded");
+    }
+
+    public async Task<Result<string>> CompleteAppointmentAsync(CompleteAppointmentDto request, CancellationToken cancellationToken)
+    {
+        var appointment = 
+            await appointmentRepository
+            .GetByExpressionWithTrackingAsync(x => x.Id ==request.AppointmentId, cancellationToken);
+        if (appointment is null)
+        {
+            return Result<string>.Failure(500,"Appointment is null.");
+        }
+        if (appointment.IsItFinished)
+        {
+            return Result<string>.Failure(500,"Appointment is already finished. You cannot close again.");
+        }
+        appointment.EpicrisisReport = request.EpicrisisReport;
+        appointment.IsItFinished = true;
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        return Result<string>.Succeed("Appointment is completed");
+
     }
 }

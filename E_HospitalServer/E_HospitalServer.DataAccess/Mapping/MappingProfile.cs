@@ -44,7 +44,6 @@ public class MappingProfile : Profile
             .ForMember(member => member.StartDate, options => 
                 options.MapFrom(src => DateTime.SpecifyKind(src.StartDate,DateTimeKind.Utc)))
             .ForMember(member => member.EndDate, options => 
-                options.MapFrom(src => DateTime.SpecifyKind(src.EndDate, DateTimeKind.Utc)))
-            ;
+                options.MapFrom(src => DateTime.SpecifyKind(src.EndDate, DateTimeKind.Utc)));
     }
 }

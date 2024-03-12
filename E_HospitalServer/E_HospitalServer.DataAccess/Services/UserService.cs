@@ -26,14 +26,6 @@ internal sealed class UserService(
             }
         }
         
-        if (request.Username is not null)
-        {
-            var isUserNameExists = await userManager.Users.AnyAsync(p => p.UserName == request.Username, cancellationToken: cancellationToken);
-            if (isUserNameExists)
-            {
-                return Result<string>.Failure(StatusCodes.Status409Conflict, "User name is already taken");
-            }
-        }
 
         if(request.IdentityNumber != "11111111111")
         {
@@ -45,6 +37,12 @@ internal sealed class UserService(
         }
 
         var user = mapper.Map<User>(request);
+
+        var isUserNameExists = await userManager.Users.AnyAsync(p => p.UserName == request.Username, cancellationToken: cancellationToken);
+        if (isUserNameExists)
+        {
+            return Result<string>.Failure(StatusCodes.Status409Conflict, "User name is already taken");
+        }
     
         Random random = new();
 
@@ -57,7 +55,7 @@ internal sealed class UserService(
                 isEmailConfirmCodeExists = false;
             }
         }
-        user.EmailConfirmCodeSendDate = DateTime.UtcNow;
+
         
         if (request.Specialty is not null)
         {
@@ -97,7 +95,7 @@ internal sealed class UserService(
     {
         if (request.Email is not null)
         {
-            bool isEmailExists = await userManager.Users.AnyAsync(p => p.Email == request.Email);
+            bool isEmailExists = await userManager.Users.AnyAsync(p => p.Email == request.Email, cancellationToken: cancellationToken);
             if (isEmailExists)
             {
                 return Result<string>.Failure(StatusCodes.Status409Conflict, "Email already has taken");
@@ -106,7 +104,7 @@ internal sealed class UserService(
 
         if (request.IdentityNumber != "11111111111")
         {
-            bool isIdentityNumberExists = await userManager.Users.AnyAsync(p => p.IdentityNumber == request.IdentityNumber);
+            bool isIdentityNumberExists = await userManager.Users.AnyAsync(p => p.IdentityNumber == request.IdentityNumber, cancellationToken: cancellationToken);
             if (isIdentityNumberExists)
             {
                 return Result<string>.Failure(StatusCodes.Status409Conflict, "Identity number already exists");
@@ -115,6 +113,13 @@ internal sealed class UserService(
 
         User user = mapper.Map<User>(request);        
         user.UserType = UserType.Patient;
+
+        var number = 0;
+        while (await userManager.Users.AnyAsync(p => p.UserName == user.UserName, cancellationToken: cancellationToken))
+        {
+            number++;
+            user.UserName += number;
+        }
 
         Random random = new();
 
