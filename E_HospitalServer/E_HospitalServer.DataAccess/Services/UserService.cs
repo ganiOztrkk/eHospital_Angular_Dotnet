@@ -59,6 +59,7 @@ internal sealed class UserService(
         
         if (request.Specialty is not null)
         {
+            //user.UserType = UserType.Doctor;
             user.DoctorDetail = new DoctorDetail
             {
                 Specialty = (Specialty)request.Specialty,
