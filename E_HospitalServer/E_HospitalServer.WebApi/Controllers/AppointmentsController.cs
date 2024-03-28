@@ -37,7 +37,7 @@ public sealed class AppointmentsController(
         return StatusCode(response.StatusCode, response);
     }
     
-    [HttpGet]
+    [HttpGet("{doctorId}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetAllByDoctorId(Guid doctorId, CancellationToken cancellationToken)
     {
@@ -45,5 +45,4 @@ public sealed class AppointmentsController(
 
         return StatusCode(response.StatusCode, response);
     }
-
 }

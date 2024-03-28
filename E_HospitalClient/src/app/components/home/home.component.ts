@@ -40,13 +40,11 @@ export class HomeComponent implements OnInit {
   getDoctorAppointments() {
     if (this.selectedDoctorId === "") return;
 
-    this.http.get(`http://localhost:5056/api/Appointments/GetAllByDoctorId?doctorId=${this.selectedDoctorId}`).subscribe((res:any) => {
-
-    console.log(res.data);
+    this.http.get("http://localhost:5056/api/Appointments/GetAllByDoctorId/" + this.selectedDoctorId).subscribe((res:any) => {
     
     const data = res.data.map((val: any, i: number) => {
       return {
-        text: val.patient.fullName,
+        text: val.patient.firstName +" "+ val.patient.lastName,
         startDate: new Date(val.startDate),
         endDate: new Date(val.endDate)
       };

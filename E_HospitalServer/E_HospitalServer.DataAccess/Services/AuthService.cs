@@ -93,7 +93,7 @@ public class AuthService(
         #region Send Mail Verification
 
         string subject = "Verification Mail";
-        string body = CreateConfirmEmailBody(user.EmailConfirmCode.ToString());
+        string body = CreateConfirmEmailBody(user.EmailConfirmCode.ToString()!);
 
         var stringEmailResponse = await EmailHelper.SendEmailAsync(user.Email ?? "", subject, body);
 
@@ -118,6 +118,7 @@ public class AuthService(
         }
 
         user.EmailConfirmed = true;
+        user.EmailConfirmCode = null;
         await userManager.UpdateAsync(user);
 
         return Result<string>.Succeed("Email verification is succeed");

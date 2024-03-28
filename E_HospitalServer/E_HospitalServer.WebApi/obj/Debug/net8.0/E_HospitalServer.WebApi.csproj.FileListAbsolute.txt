@@ -104,7 +104,6 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.E_HospitalServer.WebApi.props
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/staticwebassets.pack.json
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/scopedcss/bundle/E_HospitalServer.WebApi.styles.css
-/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/E_HospitalServer.WebApi.csproj.CopyComplete
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/E_HospitalServer.WebApi.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/refint/E_HospitalServer.WebApi.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/E_HospitalServer.WebApi.pdb
@@ -236,7 +235,6 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Scripting.resources.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Scripting.resources.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll
-/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Diagnostics.EventLog.Messages.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll
@@ -262,3 +260,4 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/FluentValidation.AspNetCore.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/FluentValidation.DependencyInjectionExtensions.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/bin/Debug/net8.0/DefaultCorsPolicyNugetPackage.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.WebApi/obj/Debug/net8.0/E_Hospit.99FE5511.Up2Date

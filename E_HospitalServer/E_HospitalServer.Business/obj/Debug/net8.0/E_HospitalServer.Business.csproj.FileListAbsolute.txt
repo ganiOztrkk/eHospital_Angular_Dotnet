@@ -11,8 +11,8 @@
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/E_HospitalServer.Business.AssemblyInfo.cs
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/E_HospitalServer.Business.csproj.CoreCompileInputs.cache
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/E_HospitalServer.Business.sourcelink.json
-/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/E_HospitalServer.Business.csproj.CopyComplete
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/E_HospitalServer.Business.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/refint/E_HospitalServer.Business.dll
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/E_HospitalServer.Business.pdb
 /Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/ref/E_HospitalServer.Business.dll
+/Users/gani/Desktop/Github/E_Hospital/E_HospitalServer/E_HospitalServer.Business/obj/Debug/net8.0/E_Hospit.DD7457D7.Up2Date
