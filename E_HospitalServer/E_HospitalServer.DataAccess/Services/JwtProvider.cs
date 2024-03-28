@@ -19,34 +19,35 @@ public class JwtProvider(
         List<Claim> claims = new()
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, string.Join(" ",user.FirstName, user.LastName)),
+            new Claim(ClaimTypes.Name, user.FullName),
             new Claim(ClaimTypes.Email, user.Email ?? ""),
-            new Claim("Username", user.UserName ?? "" )
+            new Claim("UserName", user.UserName ?? ""),
+            new Claim("UserType", user.UserType.ToString())
         };
         
-        var expires = DateTime.UtcNow.AddHours(4);
+        DateTime expires = DateTime.UtcNow.AddHours(1);
 
-        if (rememberMe) 
+        if (rememberMe)
+        {
             expires = expires.AddDays(1);
-        
+        }
+
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey));
 
-        
         JwtSecurityToken jwtSecurityToken = new(
-            issuer:jwtOptions.Value.Issuer,
-            audience:jwtOptions.Value.Audience,
+            issuer: jwtOptions.Value.Issuer,
+            audience: jwtOptions.Value.Audience,
             claims: claims,
-            notBefore: DateTime.Now,
+            notBefore: DateTime.UtcNow,
             expires: expires,
-            signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512)
-            );
+            signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512));
 
         JwtSecurityTokenHandler handler = new();
 
-        var token = handler.WriteToken(jwtSecurityToken);
+        string token = handler.WriteToken(jwtSecurityToken);
 
-        var refreshToken = Guid.NewGuid().ToString();
-        var refreshTokenExpires = expires.AddHours(1);
+        string refreshToken = Guid.NewGuid().ToString();
+        DateTime refreshTokenExpires = expires.AddHours(1);
 
         user.RefreshToken = refreshToken;
         user.RefreshTokenExpires = refreshTokenExpires;

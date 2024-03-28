@@ -15,14 +15,14 @@ public class MappingProfile : Profile
                                         options.MapFrom(src => src.Email!.ToLower().Trim()))
             .ForMember(member => member.FullAddress, options => options.MapFrom(src => src.FullAddress.Trim()))
             .ForMember(member => member.UserName, options =>
-                        options.MapFrom(src => src.Username == null 
+                        options.MapFrom(src => src.UserName == null 
                                         ? src.FirstName
                                             .Trim()
                                             .ToLower()
                                             .Replace(" ", "")
                                             .Replace("ğ", "g")
                                             .Replace("ş", "s")
-                                        : src.Username.Trim().ToLower()
+                                        : src.UserName.Trim().ToLower()
                                         ));
 
         CreateMap<CreatePatientDto, User>()
@@ -38,12 +38,14 @@ public class MappingProfile : Profile
                                             .ToLower()
                                             .Replace(" ", "")
                                             .Replace("ğ","g")
-                                            .Replace("ş","s")
-                                        ));
+                                            .Replace("ş","s")));
+            ;
+
         CreateMap<CreateAppointmentDto, Appointment>()
             .ForMember(member => member.StartDate, options => 
-                options.MapFrom(src => DateTime.SpecifyKind(src.StartDate,DateTimeKind.Utc)))
+                        options.MapFrom(src => DateTime.SpecifyKind(src.StartDate,DateTimeKind.Utc)))
             .ForMember(member => member.EndDate, options => 
-                options.MapFrom(src => DateTime.SpecifyKind(src.EndDate, DateTimeKind.Utc)));
+                        options.MapFrom(src => DateTime.SpecifyKind(src.EndDate, DateTimeKind.Utc)))
+            ;
     }
 }

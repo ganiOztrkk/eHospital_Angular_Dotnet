@@ -15,7 +15,7 @@ public class UsersController(
     public async Task<IActionResult> Create(CreateUserDto request, CancellationToken cancellationToken)
     {
         var response = await userService.CreateUserAsync(request, cancellationToken);
-        
+
         return StatusCode(response.StatusCode, response);
     }
 }

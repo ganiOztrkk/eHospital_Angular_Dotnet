@@ -6,8 +6,8 @@ namespace E_HospitalServer.DataAccess.Extensions;
 
 public static class UserManagerExtensions
 {
-    public static async Task<User?> FindByIdentityNumber(this UserManager<User> userManager, string identityNumber)
+    public static async Task<User?> FindByIdentityNumber(this UserManager<User> userManager, string identityNumber, CancellationToken cancellationToken = default)
     {
-        return await userManager.Users.FirstOrDefaultAsync(p=> p.IdentityNumber == identityNumber);
+        return await userManager.Users.FirstOrDefaultAsync(p=> p.IdentityNumber == identityNumber, cancellationToken);
     }
 }

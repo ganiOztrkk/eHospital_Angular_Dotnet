@@ -16,17 +16,16 @@ namespace E_HospitalServer.WebApi.Controllers
 
             return StatusCode(response.StatusCode, response);
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetTokenByRefreshToken(string refreshToken, CancellationToken cancellationToken)
-        {
-            var response = await authService.GetTokeByRefreshTokenAsync(refreshToken, cancellationToken);
+        {        
+            var response = await authService.GetTokenByRefreshTokenAsync(refreshToken, cancellationToken);
 
             return StatusCode(response.StatusCode, response);
         }
-        
-        
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> SendConfirmMail(string email, CancellationToken cancellationToken)
@@ -42,7 +41,7 @@ namespace E_HospitalServer.WebApi.Controllers
             var response = await authService.ConfirmVerificationEmailAsync(emailConfirmCode, cancellationToken);
             return StatusCode(response.StatusCode, response);
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> SendForgotPasswordEmail(string emailOrUserName, CancellationToken cancellationToken)

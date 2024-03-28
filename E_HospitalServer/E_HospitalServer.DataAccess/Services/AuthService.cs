@@ -12,26 +12,61 @@ public class AuthService(
     SignInManager<User> signInManager,
     JwtProvider jwtProvider) : IAuthService
 {
+    public async Task<Result<string>> ConfirmVerificationEmailAsync(int emailConfirmCode, CancellationToken cancellationToken)
+    {
+        User? user = await userManager.Users.Where(p=> p.EmailConfirmCode == emailConfirmCode).FirstOrDefaultAsync(cancellationToken);
+        if (user is null)
+        {
+            return Result<string>.Failure(500, "Email confirm code is not available");
+        }
+
+        if (user.EmailConfirmed)
+        {
+            return Result<string>.Failure(500, "User email already confirmed");
+        }
+
+        user.EmailConfirmed = true;
+        await userManager.UpdateAsync(user);
+
+        return Result<string>.Succeed("Email verification is succeed");
+    }
+
+    public async Task<Result<LoginResponseDto>> GetTokenByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken)
+    {
+        User? user = await userManager.Users.Where(p => p.RefreshToken == refreshToken).FirstOrDefaultAsync(cancellationToken);
+
+        if (user is null)
+        {
+            return (500, "Refresh token unavailable");
+        }
+
+        var loginResponse = await jwtProvider.CreateToken(user, false);
+
+
+        return loginResponse;
+    }
+
     public async Task<Result<LoginResponseDto>> LoginAsync(LoginRequestDto request, CancellationToken cancellationToken)
     {
-        var emailOrUsername = request.EmailOrUsername.ToUpper();
-        var user = await userManager.Users
-            .FirstOrDefaultAsync(x =>
-                    x.NormalizedEmail == emailOrUsername ||
-                    x.NormalizedUserName == emailOrUsername,
-                cancellationToken);
-        if (user is null)
+        string emailOrUserName = request.EmailOrUserName.ToUpper();
+        User? user = await userManager.Users
+            .FirstOrDefaultAsync(p => 
+            p.NormalizedUserName == emailOrUserName || 
+            p.NormalizedEmail == emailOrUserName, 
+            cancellationToken);
+
+        if(user is null)
         {
             return (500, "User not found");
         }
 
-        var signInResult = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
+        SignInResult signInResult = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
+
         if (signInResult.IsLockedOut)
         {
             TimeSpan? timeSpan = user.LockoutEnd - DateTime.UtcNow;
             if (timeSpan is not null)
-                return (500,
-                    $"Your user has been locked for {Math.Ceiling(timeSpan.Value.TotalMinutes)} minutes due to entering the wrong password 3 times.");
+                return (500, $"Your user has been locked for {Math.Ceiling(timeSpan.Value.TotalMinutes)} minutes due to entering the wrong password 3 times.");
             else
                 return (500, "Your user has been locked out for 5 minutes due to entering the wrong password 3 times.");
         }
@@ -46,28 +81,15 @@ public class AuthService(
             return (500, "Your password is wrong");
         }
 
+        var loginResponse = await jwtProvider.CreateToken(user, request.RememberMe);        
 
-        var loginResponse = await jwtProvider.CreateToken(user, request.RememberMe);
-
-        return loginResponse;
-    }
-
-    public async Task<Result<LoginResponseDto>> GetTokeByRefreshTokenAsync(string refreshToken,
-        CancellationToken cancellationToken)
-    {
-        var user = await userManager.Users
-            .Where(x => x.RefreshToken == refreshToken)
-            .FirstOrDefaultAsync(cancellationToken);
-        if (user is null) return (500, "Refresh token is not valid.");
-
-        var loginResponse = await jwtProvider.CreateToken(user, false);
 
         return loginResponse;
     }
 
     public async Task<Result<string>> SendConfirmEmailAsync(string email, CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByEmailAsync(email);
+        User? user = await userManager.FindByEmailAsync(email);
         if (user is null)
         {
             return Result<string>.Failure(500, "User cannot be found");
@@ -91,37 +113,49 @@ public class AuthService(
         await userManager.UpdateAsync(user);
 
         #region Send Mail Verification
-
         string subject = "Verification Mail";
-        string body = CreateConfirmEmailBody(user.EmailConfirmCode.ToString()!);
+        string body = CreateConfirmEmailBody(user.EmailConfirmCode.ToString());
 
         var stringEmailResponse = await EmailHelper.SendEmailAsync(user.Email ?? "", subject, body);
-
         #endregion
 
         return Result<string>.Succeed("Verification mail is sent successfully");
     }
 
-    public async Task<Result<string>> ConfirmVerificationEmailAsync(int emailConfirmCode,
-        CancellationToken cancellationToken)
+    public async Task<Result<string>> ChangePasswordWithForgotPasswordCodeAsync(ChangePasswordWithForgotPasswordCodeDto request, CancellationToken cancellationToken)
     {
-        var user = await userManager.Users.Where(p => p.EmailConfirmCode == emailConfirmCode)
-            .FirstOrDefaultAsync(cancellationToken);
+        User? user = await userManager.Users.FirstOrDefaultAsync(p => p.ForgotPasswordCode == request.ForgotPasswordCode, cancellationToken);
+
         if (user is null)
         {
-            return Result<string>.Failure(500, "Email confirm code is not available");
+            return Result<string>.Failure(500, "Your recovery password code is invalid");
         }
-
-        if (user.EmailConfirmed)
+        
+        if(user.ForgotPasswordCodeSendDate < DateTime.UtcNow)
         {
-            return Result<string>.Failure(500, "User email already confirmed");
+            return Result<string>.Failure(500, "Your recovery password code is invalid");
         }
 
-        user.EmailConfirmed = true;
-        user.EmailConfirmCode = null;
-        await userManager.UpdateAsync(user);
+        var token = await userManager.GeneratePasswordResetTokenAsync(user);
 
-        return Result<string>.Succeed("Email verification is succeed");
+        IdentityResult result = await userManager.ResetPasswordAsync(user, token, request.NewPassword);
+
+        if (!result.Succeeded)
+        {
+            return Result<string>.Failure(500, result.Errors.Select(s => s.Description).ToList());
+        }
+
+        user.ForgotPasswordCode = null;
+        user.ForgotPasswordCodeSendDate = null;
+
+        result = await userManager.UpdateAsync(user);
+
+        if (!result.Succeeded)
+        {
+            return Result<string>.Failure(500, result.Errors.Select(s => s.Description).ToList());
+        }
+
+        return Result<string>.Succeed("Your password is changed. You can sign in using new password");
     }
 
     public async Task<Result<string>> SendForgotPasswordEmailAsync(string emailOrUserName, CancellationToken cancellationToken)
@@ -158,44 +192,6 @@ public class AuthService(
 
         return Result<string>.Succeed($"Password recovery code is sent to your {email} email address");
     }
-
-    public async Task<Result<string>> ChangePasswordWithForgotPasswordCodeAsync(ChangePasswordWithForgotPasswordCodeDto request,
-        CancellationToken cancellationToken)
-    {
-        User? user = await userManager.Users.FirstOrDefaultAsync(p => p.ForgotPasswordCode == request.ForgotPasswordCode, cancellationToken);
-
-        if (user is null)
-        {
-            return Result<string>.Failure(500, "Your recovery password code is invalid");
-        }
-        
-        if(user.ForgotPasswordCodeSendDate < DateTime.UtcNow)
-        {
-            return Result<string>.Failure(500, "Your recovery password code is invalid");
-        }
-
-        var token = await userManager.GeneratePasswordResetTokenAsync(user);
-
-        IdentityResult result = await userManager.ResetPasswordAsync(user, token, request.NewPassword);
-
-        if (!result.Succeeded)
-        {
-            return Result<string>.Failure(500, result.Errors.Select(s => s.Description).ToList());
-        }
-
-        user.ForgotPasswordCode = null;
-        user.ForgotPasswordCodeSendDate = null;
-
-        result = await userManager.UpdateAsync(user);
-
-        if (!result.Succeeded)
-        {
-            return Result<string>.Failure(500, result.Errors.Select(s => s.Description).ToList());
-        }
-
-        return Result<string>.Succeed("Your password is changed. You can sign in using new password");
-    }
-
 
     private string CreateConfirmEmailBody(string emailConfirmCode)
     {
@@ -252,18 +248,12 @@ public class AuthService(
         <p>Please use the following code to confirm your email:</p>
         <div class=""confirmation-code"">
             <!-- Her bir rakam için ayrı bir kutu oluşturuluyor -->
-            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " +
-                      emailConfirmCode[0] + @" </div></div>
-            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " +
-                      emailConfirmCode[1] + @" </div></div>
-            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " +
-                      emailConfirmCode[2] + @" </div></div>
-            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " +
-                      emailConfirmCode[3] + @" </div></div>
-            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " +
-                      emailConfirmCode[4] + @" </div></div>
-            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " +
-                      emailConfirmCode[5] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + emailConfirmCode[0] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + emailConfirmCode[1] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + emailConfirmCode[2] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + emailConfirmCode[3] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + emailConfirmCode[4] + @" </div></div>
+            <div class=""digit-container""> <div style=""padding-right: 20px; padding-left: 20px; ""> " + emailConfirmCode[5] + @" </div></div>
         </div>
         <p style=""margin-top: 20px;"">This code will expire in 10 minutes.</p>
     </div>
@@ -273,7 +263,7 @@ public class AuthService(
 
         return body;
     }
-    
+
     private string CreateSendForgotPasswordCodeEmailBody(string forgotPasswordCode)
     {
         string body = @"
@@ -344,7 +334,7 @@ public class AuthService(
 
         return body;
     }
-    
+
     private string MaskEmail(string email)
     {
         var atIndex = email.IndexOf('@');

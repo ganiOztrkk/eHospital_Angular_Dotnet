@@ -73,9 +73,10 @@ namespace E_HospitalServer.DataAccess.Migrations
 
             modelBuilder.Entity("E_HospitalServer.Entities.Models.DoctorDetail", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnName("id");
 
                     b.Property<decimal>("AppointmentPrice")
                         .HasColumnType("money")
@@ -90,7 +91,7 @@ namespace E_HospitalServer.DataAccess.Migrations
                         .HasColumnType("text[]")
                         .HasColumnName("working_days");
 
-                    b.HasKey("UserId")
+                    b.HasKey("Id")
                         .HasName("pk_doctor_detail");
 
                     b.ToTable("doctor_detail", (string)null);
@@ -108,7 +109,6 @@ namespace E_HospitalServer.DataAccess.Migrations
                         .HasColumnName("access_failed_count");
 
                     b.Property<string>("BloodType")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("blood_type");
 
@@ -128,7 +128,7 @@ namespace E_HospitalServer.DataAccess.Migrations
                         .HasColumnType("text")
                         .HasColumnName("email");
 
-                    b.Property<int?>("EmailConfirmCode")
+                    b.Property<int>("EmailConfirmCode")
                         .HasColumnType("integer")
                         .HasColumnName("email_confirm_code");
 
@@ -231,6 +231,9 @@ namespace E_HospitalServer.DataAccess.Migrations
                     b.HasKey("Id")
                         .HasName("pk_user");
 
+                    b.HasIndex("DoctorDetailId")
+                        .HasDatabaseName("ix_user_doctor_detail_id");
+
                     b.HasIndex("EmailConfirmCode")
                         .IsUnique()
                         .HasDatabaseName("ix_user_email_confirm_code");
@@ -284,18 +287,13 @@ namespace E_HospitalServer.DataAccess.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("E_HospitalServer.Entities.Models.DoctorDetail", b =>
-                {
-                    b.HasOne("E_HospitalServer.Entities.Models.User", null)
-                        .WithOne("DoctorDetail")
-                        .HasForeignKey("E_HospitalServer.Entities.Models.DoctorDetail", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_doctor_detail_user_user_id");
-                });
-
             modelBuilder.Entity("E_HospitalServer.Entities.Models.User", b =>
                 {
+                    b.HasOne("E_HospitalServer.Entities.Models.DoctorDetail", "DoctorDetail")
+                        .WithMany()
+                        .HasForeignKey("DoctorDetailId")
+                        .HasConstraintName("fk_user_doctor_detail_doctor_detail_id");
+
                     b.Navigation("DoctorDetail");
                 });
 #pragma warning restore 612, 618

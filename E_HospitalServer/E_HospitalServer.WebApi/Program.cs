@@ -8,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDefaultCors();
-builder.Services.AddDataAccess(builder.Configuration);
 builder.Services.AddBusiness();
+builder.Services.AddDataAccess(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

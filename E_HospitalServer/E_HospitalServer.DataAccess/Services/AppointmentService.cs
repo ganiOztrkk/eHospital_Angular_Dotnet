@@ -1,5 +1,6 @@
 using AutoMapper;
 using E_HospitalServer.Business.Services;
+using E_HospitalServer.DataAccess.Extensions;
 using E_HospitalServer.Entities.DTOs;
 using E_HospitalServer.Entities.Enums;
 using E_HospitalServer.Entities.Models;
@@ -15,11 +16,37 @@ internal sealed class AppointmentService(
     UserManager<User> userManager,
     IAppointmentRepository appointmentRepository,
     IUnitOfWork unitOfWork,
+    IUserService userService,
     IMapper mapper) : IAppointmentService
 {
+    public async Task<Result<string>> CompleteAsync(CompleteAppointmentDto request, CancellationToken cancellationToken)
+    {
+        Appointment? appointment = 
+            await appointmentRepository
+            .GetByExpressionWithTrackingAsync(p => p.Id == request.AppointmentId, cancellationToken);
+
+        if(appointment is null)
+        {
+            return Result<string>.Failure(500,"Appointment not found");
+        }
+
+        if (appointment.IsItFinished)
+        {
+            return Result<string>.Failure(500,"Appointment already finish. You cannot close again");
+        }
+
+        appointment.EpicrisisReport = request.EpicrisisReport;
+        appointment.IsItFinished = true;
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return Result<string>.Succeed("Appointment is completed");
+
+    }
+
     public async Task<Result<string>> CreateAsync(CreateAppointmentDto request, CancellationToken cancellationToken)
     {
-        User? doctor = await userManager.Users.Include(p=> p.DoctorDetail).FirstOrDefaultAsync(p=> p.Id == request.DoctorId, cancellationToken: cancellationToken);
+        User? doctor = await userManager.Users.Include(p=> p.DoctorDetail).FirstOrDefaultAsync(p=> p.Id == request.DoctorId, cancellationToken);
         if(doctor is null || doctor.UserType is not UserType.Doctor)
         {
             return Result<string>.Failure(500,"Doctor not found");
@@ -33,7 +60,7 @@ internal sealed class AppointmentService(
         }
 
         IQueryable<Appointment> appointments =
-            appointmentRepository
+                 appointmentRepository
                 .GetWhere(p => p.DoctorId == request.DoctorId);
 
         DateTime startDate = DateTime.SpecifyKind(request.StartDate, DateTimeKind.Utc);
@@ -43,18 +70,35 @@ internal sealed class AppointmentService(
 
         isDoctorHaveAppointment = await appointments
             .AnyAsync(p =>                        
-                    ((p.StartDate < endDate && p.StartDate >= startDate) || // Mevcut randevunun bitişi, diğer randevunun başlangıcıyla çakışıyor
-                     (p.EndDate > startDate && p.EndDate <= endDate) || // Mevcut randevunun başlangıcı, diğer randevunun bitişiyle çakışıyor
-                     (p.StartDate >= startDate && p.EndDate <= endDate) || // Mevcut randevu, diğer randevu içinde tamamen
-                     (p.StartDate <= startDate && p.EndDate >= endDate)), // Mevcut randevu, diğer randevuyu tamamen kapsıyor
-                cancellationToken);      
+                        ((p.StartDate < endDate && p.StartDate >= startDate) || // Mevcut randevunun bitişi, diğer randevunun başlangıcıyla çakışıyor
+                        (p.EndDate > startDate && p.EndDate <= endDate) || // Mevcut randevunun başlangıcı, diğer randevunun bitişiyle çakışıyor
+                        (p.StartDate >= startDate && p.EndDate <= endDate) || // Mevcut randevu, diğer randevu içinde tamamen
+                        (p.StartDate <= startDate && p.EndDate >= endDate)), // Mevcut randevu, diğer randevuyu tamamen kapsıyor
+                        cancellationToken);
 
-        if(isDoctorHaveAppointment)
+        if (isDoctorHaveAppointment)
         {
             return Result<string>.Failure(500,"Doctor is not available in that time");
         }
 
         Appointment appointment = mapper.Map<Appointment>(request);
+
+        if (request.PatientId is null)
+        {
+            CreatePatientDto createPatientDto = new(
+                request.FirstName,
+                request.LastName,
+                request.IdentityNumber,
+                request.FullAddress,
+                request.Email,
+                request.PhoneNumber,
+                request.DateOfBirth,
+                request.BloodType);
+
+           var createPatientResponse = await userService.CreatePatientAsync(createPatientDto, cancellationToken);
+
+            appointment.PatientId = createPatientResponse.Data;
+        }        
 
         await appointmentRepository.AddAsync(appointment, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
@@ -62,37 +106,51 @@ internal sealed class AppointmentService(
         return Result<string>.Succeed("Create appointment is succedded");
     }
 
-    public async Task<Result<string>> CompleteAsync(CompleteAppointmentDto request, CancellationToken cancellationToken)
+    public async Task<Result<string>> DeleteByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var appointment = 
-            await appointmentRepository
-            .GetByExpressionWithTrackingAsync(x => x.Id ==request.AppointmentId, cancellationToken);
-        if (appointment is null)
+        Appointment? appointment = await appointmentRepository.GetByExpressionAsync(p => p.Id == id, cancellationToken);
+        if(appointment is null)
         {
-            return Result<string>.Failure(500,"Appointment is null.");
+            return Result<string>.Failure(500,"Appointment not found");
         }
-        if (appointment.IsItFinished)
-        {
-            return Result<string>.Failure(500,"Appointment is already finished. You cannot close again.");
-        }
-        appointment.EpicrisisReport = request.EpicrisisReport;
-        appointment.IsItFinished = true;
 
+        appointmentRepository.Delete(appointment);
         await unitOfWork.SaveChangesAsync(cancellationToken);
-        return Result<string>.Succeed("Appointment is completed");
 
+        return Result<string>.Succeed("Appointment delete is successful");
+    }
+
+    public async Task<Result<User?>> FindPatientByIdentityNumberAsync(FindPatientDto request, CancellationToken cancellationToken)
+    {
+        User? user =
+            await userManager
+            .FindByIdentityNumber(request.IdentityNumber, cancellationToken);
+
+        return Result<User?>.Succeed(user);
     }
 
     public async Task<Result<List<Appointment>>> GetAllByDoctorIdAsync(Guid doctorId, CancellationToken cancellationToken)
     {
         List<Appointment> appointments = 
             await appointmentRepository
-                .GetWhere(p=> p.DoctorId == doctorId)
-                .Include(p=> p.Doctor)
-                .Include(p=> p.Patient)
-                .OrderBy(p=> p.StartDate)
-                .ToListAsync(cancellationToken: cancellationToken);
+            .GetWhere(p=> p.DoctorId == doctorId)
+            .Include(p=> p.Doctor)
+            .Include(p=> p.Patient)
+            .OrderBy(p=> p.StartDate).ToListAsync(cancellationToken);
 
         return Result<List<Appointment>>.Succeed(appointments);
+    }
+
+    public async Task<Result<List<User>>> GetAllDoctorsAsync(CancellationToken cancellationToken)
+    {
+        var doctors =
+            await userManager
+            .Users
+            .Where(p => p.UserType == UserType.Doctor)
+            .Include(p => p.DoctorDetail)
+            .OrderBy(p => p.FirstName)
+            .ToListAsync(cancellationToken);
+
+        return Result<List<User>>.Succeed(doctors);
     }
 }

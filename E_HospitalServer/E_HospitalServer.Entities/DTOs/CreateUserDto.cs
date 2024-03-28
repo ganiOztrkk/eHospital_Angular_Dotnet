@@ -8,11 +8,12 @@ public sealed record CreateUserDto(
     string IdentityNumber = "11111111111",
     string FullAddress = "",
     string? Email = null,
-    string? Username = null,
+    string? UserName = null,
     string? Password = null,
     string? PhoneNumber = null,
     DateOnly? DateOfBirth = null,
     string? BloodType = null,
+    UserType UserType = UserType.User,
     Specialty? Specialty = null,
     List<string>? WorkingDays = null
     );

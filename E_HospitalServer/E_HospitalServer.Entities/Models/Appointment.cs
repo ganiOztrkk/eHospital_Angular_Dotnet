@@ -1,8 +1,8 @@
 namespace E_HospitalServer.Entities.Models;
 
-public sealed class Appointment 
+public sealed class Appointment
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public Guid DoctorId { get; set; }
     public User? Doctor { get; set; }
 
